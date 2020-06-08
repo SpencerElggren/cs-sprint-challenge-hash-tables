@@ -6,9 +6,16 @@ class Ticket:
 
 
 def reconstruct_trip(tickets, length):
-    """
-    YOUR CODE HERE
-    """
-    # Your code here
+    destinations = [None] * length
 
-    return route
+    destination_lookup = dict()
+    for ticket in tickets:
+        destination_lookup[ticket.source] = ticket.destination
+
+    next_destination = destination_lookup["NONE"]
+
+    for current_leg in range(0, length):
+        destinations[current_leg] = next_destination
+        next_destination = destination_lookup[next_destination]
+
+    return destinations
